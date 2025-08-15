@@ -1,5 +1,8 @@
 import { Link, useLoaderData } from "react-router-dom";
 import "./App.css";
+import './index.css';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   const loadedAllCoffees = useLoaderData();
@@ -16,6 +19,7 @@ function App() {
   };
   return (
     <>
+    <Header></Header>
       <h1>Coffee Store</h1>
       <div>
         {loadedAllCoffees.map((coffee) => (
@@ -32,10 +36,8 @@ function App() {
         <button className="btn btn-warning">
           <Link to="/addCoffee">Add Coffee</Link>
         </button>
-        <button className="btn btn-warning">
-          <Link to="/updateCoffee">Update Coffee</Link>
-        </button>
       </div>
+        <Footer></Footer>
     </>
   );
 }
