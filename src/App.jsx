@@ -9,7 +9,7 @@ function App() {
 
   const handleDelete = (_id) => {
     console.log(_id);
-    fetch(`http://localhost:5000/coffees/${_id}`, {
+    fetch(`https://coffee-store-operation-server-4hxqoj3ob-biplpb-hasans-projects.vercel.app/coffees/${_id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

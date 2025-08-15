@@ -14,7 +14,21 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
-    loader: () => fetch("http://localhost:5000/coffees"),
+    loader: async () => {
+      try {
+        const response = await fetch(
+          "https://coffee-store-operation-server-4hxqoj3ob-biplpb-hasans-projects.vercel.app/coffees"
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error("Fetch error:", error);
+        return [];
+      }
+    },
   },
   {
     path: "/addCoffee",
@@ -23,7 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/updateCoffee/:id",
     element: <UpdateCoffee></UpdateCoffee>,
-    loader: ({ params }) => fetch(`http://localhost:5000/coffees/${params.id}`),
+    loader: ({ params }) =>
+      fetch(
+        `https://coffee-store-operation-server-4hxqoj3ob-biplpb-hasans-projects.vercel.app/coffees/${params.id}`
+      ),
   },
   {
     path: "/signin",
@@ -34,9 +51,19 @@ const router = createBrowserRouter([
     element: <SignUp></SignUp>,
   },
   {
-    path: "/allusers",
+    path: "/users",
     element: <Users></Users>,
-    loader: () => fetch('http://localhost:5000/users')
+    loader: async () => {
+      const res = await fetch(
+        "https://coffee-store-operation-server-4hxqoj3ob-biplpb-hasans-projects.vercel.app/users",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    },
   },
 ]);
 

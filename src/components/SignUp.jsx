@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../assets/Provider/Provider";
+import axios from "axios";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
@@ -15,15 +16,23 @@ const SignUp = () => {
 
       const createdAt = result?.user?.metadata?.creationTime;
       const userInfo = { name, email, createdAt };
-      console.log(userInfo);
+      // console.log(userInfo);
 
-      fetch("http://localhost:5000/users", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(userInfo),
-      })
+      // axios.post("exampleUrl", userInfo)
+      // .then((data) => {
+      //   console.log(data.data);
+      // });
+
+      fetch(
+        "https://coffee-store-operation-server-4hxqoj3ob-biplpb-hasans-projects.vercel.app/users",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userInfo),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log("user created to db", data);
